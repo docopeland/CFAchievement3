@@ -1,0 +1,5 @@
+#find the minimum, average, and maximum replacement cost
+SELECT MIN(replacement_cost),	
+	AVG(replacement_cost),
+	MAX(replacement_cost)
+FROM film	
