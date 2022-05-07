@@ -14,3 +14,8 @@ The Rockbuster Stealth Management Board has asked a series of business questions
 ● Which countries are Rockbuster customers based in?<br>
 ● Where are customers with a high lifetime value based?<br>
 ● Do sales figures vary between geographic regions?<br>
+
+## In this repo
+● SQL files
+● the data dictionary for the Rockbuster Stealth schema
+● the Rockbuster Stealth presentation
