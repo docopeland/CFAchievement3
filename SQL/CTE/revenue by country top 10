@@ -1,0 +1,33 @@
+#find out what countries the top 10% customers live in
+WITH top_10_cust(customer_id,first_name,last_name,city,country,revenue) AS			
+(SELECT C.customer_id,			
+	C.first_name,		
+	C.last_name,		
+	E.city,		
+	F.country,		
+	SUM(A.amount) AS revenue		
+FROM payment A			
+INNER JOIN rental B ON A.rental_id = B.rental_id			
+LEFT JOIN customer C ON B.customer_id = C.customer_id			
+LEFT JOIN address D ON C.address_id = D.address_id			
+INNER JOIN city E ON D.city_id = E.city_id			
+INNER JOIN country F ON E.country_id = F.country_id			
+GROUP BY C.customer_id,C.first_name, C.last_name, E.city, F.country			
+ORDER BY revenue DESC			
+LIMIT 60)			
+			
+SELECT F.country,			
+	COUNT(DISTINCT C.customer_id) AS total_customers,		
+	COUNT(DISTINCT G.customer_id) AS top_10		
+FROM payment A			
+INNER JOIN rental B ON A.rental_id = B.rental_id			
+LEFT JOIN customer C ON B.customer_id = C.customer_id			
+LEFT JOIN address D ON C.address_id = D.address_id			
+INNER JOIN city E ON D.city_id = E.city_id			
+INNER JOIN country F ON E.country_id = F.country_id			
+LEFT JOIN top_10_cust G ON F.country = G.country			
+GROUP BY F.country			
+ORDER BY total_customers DESC			
+			
+			
+			
