@@ -1,0 +1,3 @@
+#find out how many countries there are
+SELECT COUNT(country_id)
+FROM country
