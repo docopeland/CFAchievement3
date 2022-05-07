@@ -1,0 +1,21 @@
+#find out the amount of revenue each film category has
+WITH cats (category, count) AS	
+(SELECT A.name,	
+	COUNT(film_id)
+FROM category A	
+INNER JOIN film_category B ON A.category_id = B.category_id	
+GROUP BY A.name	
+)	
+	
+SELECT F.name AS category,	
+	G.count,
+	SUM(A.amount) AS revenue
+FROM payment A	
+INNER JOIN rental B ON A.rental_id = B.rental_id	
+INNER JOIN inventory C ON B.inventory_id = C.inventory_id	
+RIGHT JOIN film D ON C.film_id = D.film_id	
+LEFT JOIN film_category E ON D.film_id = E.film_id	
+LEFT JOIN category F ON E.category_id = F.category_id	
+LEFT JOIN cats G ON F.name = G.category	
+GROUP BY F.name, G.count	
+ORDER BY revenue DESC	
