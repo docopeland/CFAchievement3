@@ -1,0 +1,4 @@
+#find the different language ids
+SELECT language_id
+FROM film
+GROUP BY language_id
