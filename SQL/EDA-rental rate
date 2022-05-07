@@ -1,0 +1,5 @@
+#find the minimum, average, and maximum rental rate
+SELECT MIN(rental_rate),	
+	AVG(rental_rate),
+	MAX(rental_rate)
+FROM film	
