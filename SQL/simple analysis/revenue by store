@@ -1,0 +1,14 @@
+#find out how much revenue is by store
+SELECT D.store_id,	
+	F.city,
+	G.country,
+	SUM(A.amount) AS revenue
+FROM payment A	
+INNER JOIN rental B ON A.rental_id = B.rental_id	
+LEFT JOIN staff C ON B.staff_id = C.staff_id	
+LEFT JOIN store D ON C.store_id = D.store_id	
+LEFT JOIN address E ON D.address_id = E.address_id	
+LEFT JOIN city F ON E.city_id = F.city_id	
+LEFT JOIN country G ON F.country_id = G.country_id	
+GROUP BY D.store_id, F.city, G.country	
+ORDER BY revenue DESC	
