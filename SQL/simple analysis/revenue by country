@@ -1,0 +1,13 @@
+#find out how much each country contributes to revenue
+SELECT F.country,	
+	COUNT(DISTINCT C.customer_id) as number_customers,
+	SUM(A.amount) AS revenue,
+	SUM(A.amount)/COUNT(DISTINCT C.customer_id) as revenue_by_customer
+FROM payment A	
+INNER JOIN rental B ON A.rental_id = B.rental_id	
+LEFT JOIN customer C ON B.customer_id = C.customer_id	
+LEFT JOIN address D ON C.address_id = D.address_id	
+INNER JOIN city E ON D.city_id = E.city_id	
+INNER JOIN country F ON E.country_id = F.country_id	
+GROUP BY F.country	
+ORDER BY revenue DESC	
