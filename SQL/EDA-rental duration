@@ -1,0 +1,5 @@
+#find the minimum, average, and maximum rental duration
+SELECT MIN(rental_duration),	
+	AVG(rental_duration),
+	MAX(rental_duration)
+FROM film	
