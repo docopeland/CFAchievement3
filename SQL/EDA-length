@@ -1,0 +1,5 @@
+#find the minimum, average, and maximum film length
+SELECT MIN(length),	
+	AVG(length),
+	MAX(length)
+FROM film	
