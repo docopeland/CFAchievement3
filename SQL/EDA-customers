@@ -1,0 +1,4 @@
+#find out how many customers there are
+SELECT COUNT(customer_id) AS num_customers,	
+	SUM(active) AS active_customers
+FROM customer	
