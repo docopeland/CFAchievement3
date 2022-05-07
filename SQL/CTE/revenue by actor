@@ -1,0 +1,25 @@
+#find out who the most profitable actors are
+WITH actor_revenue (actor_id, first_name, last_name, revenue) AS		
+(SELECT F.actor_id,		
+	F.first_name,	
+	F.last_name,	
+	SUM(A.amount) AS revenue	
+FROM payment A		
+INNER JOIN rental B ON A.rental_id = B.rental_id		
+INNER JOIN inventory C ON B.inventory_id = C.inventory_id		
+RIGHT JOIN film D ON C.film_id = D.film_id		
+LEFT JOIN film_actor E ON D.film_id = E.film_id		
+LEFT JOIN actor F ON E.actor_id = F.actor_id		
+GROUP BY F.actor_id, F.first_name, F.last_name		
+ORDER BY revenue DESC)		
+		
+SELECT C.first_name,		
+	C.last_name,	
+	COUNT(*),	
+	D.revenue	
+FROM film A		
+LEFT JOIN film_actor B ON A.film_id = B.film_id		
+LEFT JOIN actor C ON B.actor_id = C.actor_id		
+LEFT JOIN actor_revenue D ON C.actor_id = D.actor_id		
+GROUP BY C.first_name, C.last_name, D.revenue		
+ORDER BY revenue DESC	
